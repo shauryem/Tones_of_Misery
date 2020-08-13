@@ -3,24 +3,22 @@ using System.Collections;
 
 public class pickupPoints : MonoBehaviour {
 
-
 	public int scoreToGive;
-
 	private ScoreManager theScoreManager;
-
 	public AudioSource coinSound;
-	// Use this for initialization
-	void Start () {
 	
+	// Called at the start of each game
+	
+	void Start () {
+		
+		// Find and sets Score Manager object
+		
 		theScoreManager = FindObjectOfType<ScoreManager> ();
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	// If a player collides with a coin, then the score is increased by a set value
 	
-	}
-
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if(other.gameObject.name == "Player")
