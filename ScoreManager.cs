@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -12,8 +12,11 @@ public class ScoreManager : MonoBehaviour {
 	public bool scoreIncreasing;
 
 
-	// Use this for initialization
+	// Called at the start of the game
+	
 	void Start () {
+		// Displays high score of player 
+		
 		if (PlayerPrefs.HasKey ("HighScore")) {
 		
 			hiScoreCount = PlayerPrefs.GetFloat("HighScore");
@@ -25,10 +28,14 @@ public class ScoreManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-
+		// Calculate currents score
+		
 		if (scoreIncreasing){
 			scoreCount += pointsPerSecond * Time.deltaTime;
 		}
+		
+		// If current score is higher than high score, update high score
+		
 		if (scoreCount > hiScoreCount)
 		{
 			hiScoreCount = scoreCount;
@@ -38,7 +45,9 @@ public class ScoreManager : MonoBehaviour {
 		hiScoreText.text = "High Score: " + Mathf.Round (hiScoreCount);
 
 	}
-
+	
+	// Helper function to add score to current 
+	
 	public void AddScore (int pointsToAdd)
 	{
 
