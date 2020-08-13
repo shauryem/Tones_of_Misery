@@ -6,46 +6,28 @@ public class GameManager : MonoBehaviour {
 
 	public Transform platformGenerator;
 	private Vector3 platformStartPoint;
-
 	public PlayerController thePlayer;
 	private Vector3 playerStartPoint;
-
 	private PlatformDestroyer[] platformList;
-
 	private ScoreManager theScoreManager;
-
 	public DeathMenu theDeathScreen;
 
-	// Use this for initialization
+	// Called at the start of the game
 	void Start () {
 	
 		platformStartPoint = platformGenerator.position;
 		playerStartPoint = thePlayer.transform.position;
-
 		theScoreManager = FindObjectOfType<ScoreManager> ();
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-
-
-
-	}
-
+	// Resets initial game variables such as score
 	public void RestartGame()
 	{
 	
 		theScoreManager.scoreIncreasing = false;
 		thePlayer.gameObject.SetActive (false);
-
 		theDeathScreen.gameObject.SetActive (true);
-
-		//StartCoroutine ("RestartGameCo");
-
-		
-	
 
 
 	}
@@ -54,11 +36,15 @@ public class GameManager : MonoBehaviour {
 	{
 		theDeathScreen.gameObject.SetActive (false);
 		platformList = FindObjectsOfType<PlatformDestroyer> ();
+		
+		// Delete all current platforms
+		
 		for (int i = 0; i < platformList.Length; i++) {
 
 			platformList [i].gameObject.SetActive (false);
 		}
-
+		// reinitialize variables to starting positions
+		
 		thePlayer.transform.position = playerStartPoint;
 		platformGenerator.position = platformStartPoint;
 		thePlayer.gameObject.SetActive (true);
@@ -66,22 +52,4 @@ public class GameManager : MonoBehaviour {
 		theScoreManager.scoreCount = 0;
 		theScoreManager.scoreIncreasing = true;
 	}
-/*	public IEnumerator RestartGameCo()
-	{
-		theScoreManager.scoreIncreasing = false;
-		thePlayer.gameObject.SetActive (false);
-		yield return new WaitForSeconds (0.75f);
-		platformList = FindObjectsOfType<PlatformDestroyer> ();
-		for (int i = 0; i < platformList.Length; i++) {
-		
-			platformList [i].gameObject.SetActive (false);
-		}
-
-		thePlayer.transform.position = playerStartPoint;
-		platformGenerator.position = platformStartPoint;
-		thePlayer.gameObject.SetActive (true);
-
-		theScoreManager.scoreCount = 0;
-		theScoreManager.scoreIncreasing = true;
-	}*/
 }
